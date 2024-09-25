@@ -28,6 +28,7 @@ PROGRAM_VERSION = '0.1'
 PROGRAM_DESCRIPTION = 'Get all devices of a specific site'
 DEFAULT_CONFIG_FILE = get_config_directory() / 'sample.cfg'
 
+
 def setup_argparser():
     parser = argparse.ArgumentParser(description='{} - {}'.format(PROGRAM_NAME, PROGRAM_DESCRIPTION))
     parser.add_argument('site')
@@ -42,9 +43,9 @@ if __name__ == '__main__':
     setup_console_logger(args.log_level)
     config = get_config_from_file(args.config)
     logging.info("connect to %s", config['armis-server']['url'])
-    
-    armis_conection = ArmisCloud(api_secret_key=config['armis-server']['APIkey'],tenant_hostname=config['armis-server']['url'])
-    
+
+    armis_conection = ArmisCloud(api_secret_key=config['armis-server']['APIkey'], tenant_hostname=config['armis-server']['url'])
+
     devices = armis_conection.get_devices(asq='in:devices timeFrame:"{}" site:"{}"'.format(config['query-defaults']['timeFrame'], args.site))
     for device in devices:
         print('{} - {}'.format(device['names'], device['macAddress']))
