@@ -164,3 +164,5 @@ cython_debug/
 # Pydev
 .project
 .pydevproject
+
+ukb.cfg
